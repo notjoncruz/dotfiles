@@ -1,0 +1,17 @@
+# Ignore everything
+*
+
+# Track these
+!.gitignore
+!nvim/
+!nvim/**
+!tmux/
+!tmux/**
+!mise/
+!mise/**
+
+# Generated/managed files
+nvim/lazy-lock.json
+nvim/lazyvim.json
+nvim/.luarc.json
+tmux/plugins/
