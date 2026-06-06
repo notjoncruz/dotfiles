@@ -4,30 +4,34 @@ set -euo pipefail
 DOTFILES="$(cd "$(dirname "$0")" && pwd)"
 OS="$(uname -s)"
 
+if [[ "$(id -u)" -eq 0 ]]; then
+  echo "Don't run as root. Homebrew won't install. Create a user first."
+  exit 1
+fi
+
 install_homebrew() {
   if command -v brew &>/dev/null; then return; fi
   if [[ "$OS" == "Linux" ]]; then
     sudo apt update
-    sudo apt install -y build-essential
+    sudo apt install -y build-essential zsh
   fi
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
   case "$OS" in
-    Darwin) eval "$(/opt/homebrew/bin/brew shellenv)" ;;
-    Linux)  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)" ;;
+    Darwin)
+      if [[ -x /opt/homebrew/bin/brew ]]; then
+        eval "$(/opt/homebrew/bin/brew shellenv)"
+      else
+        eval "$(/usr/local/bin/brew shellenv)"
+      fi
+      ;;
+    Linux) eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)" ;;
   esac
 }
 
 install_packages() {
-  brew bundle --no-lock --file="$DOTFILES/Brewfile"
-  if [[ "$OS" == "Linux" ]]; then
-    local brew_zsh
-    brew_zsh="$(brew --prefix)/bin/zsh"
-    if ! grep -qF "$brew_zsh" /etc/shells; then
-      echo "$brew_zsh" | sudo tee -a /etc/shells >/dev/null
-    fi
-    if [[ "$SHELL" != */zsh ]]; then
-      sudo chsh -s "$brew_zsh" "$(whoami)"
-    fi
+  brew bundle --file="$DOTFILES/Brewfile"
+  if [[ "$OS" == "Linux" && "$SHELL" != */zsh ]]; then
+    sudo chsh -s "$(which zsh)" "$(whoami)"
   fi
 }
 
@@ -39,6 +43,7 @@ install_omz() {
 
 install_tpm() {
   if [[ ! -d "$HOME/.config/tmux/plugins/tpm" ]]; then
+    mkdir -p "$HOME/.config/tmux/plugins"
     git clone https://github.com/tmux-plugins/tpm "$HOME/.config/tmux/plugins/tpm"
   fi
 }
