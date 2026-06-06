@@ -9,5 +9,16 @@ return {
         width = 0.4,
       },
     },
+    picker = {
+      sources = {
+        explorer = {
+          layout = {
+            layout = {
+              position = "right",
+            },
+          },
+        },
+      },
+    },
   },
 }
