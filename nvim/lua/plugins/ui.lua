@@ -1,16 +1,30 @@
 return {
 	{
+		"nvim-lualine/lualine.nvim",
+		opts = function(_, opts)
+			local noirbuddy_lualine = require("noirbuddy.plugins.lualine")
+			opts.options = opts.options or {}
+			opts.options.theme = noirbuddy_lualine.theme
+			opts.sections = vim.tbl_deep_extend("force", opts.sections or {}, noirbuddy_lualine.sections)
+			opts.inactive_sections = vim.tbl_deep_extend(
+				"force",
+				opts.inactive_sections or {},
+				noirbuddy_lualine.inactive_sections
+			)
+		end,
+	},
+	{
 		"b0o/incline.nvim",
-		dependencies = { "craftzdog/solarized-osaka.nvim" },
 		event = "BufReadPre",
 		priority = 1200,
 		config = function()
-			local colors = require("solarized-osaka.colors").setup()
+			local colors = require("noirbuddy.colors").all()
+
 			require("incline").setup({
 				highlight = {
 					groups = {
-						InclineNormal = { guibg = colors.magenta500, guifg = colors.base04 },
-						InclineNormalNC = { guifg = colors.violet500, guibg = colors.base03 },
+						InclineNormal = { guibg = colors.primary, guifg = colors.noir_0 },
+						InclineNormalNC = { guifg = colors.noir_4, guibg = colors.noir_7 },
 					},
 				},
 				window = { margin = { vertical = 0, horizontal = 1 } },
