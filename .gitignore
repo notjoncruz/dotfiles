@@ -3,6 +3,8 @@
 
 # Track these
 !.gitignore
+!Brewfile
+!setup.sh
 !nvim/
 !nvim/**
 !tmux/
@@ -11,6 +13,8 @@
 !ghostty/**
 !mise/
 !mise/**
+!zsh/
+!zsh/**
 
 # Generated/managed files
 nvim/lazy-lock.json
