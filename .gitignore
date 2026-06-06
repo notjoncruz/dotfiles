@@ -3,6 +3,7 @@
 
 # Track these
 !.gitignore
+!README.md
 !Brewfile
 !setup.sh
 !nvim/
