@@ -30,6 +30,7 @@ cursor-color = #ff0088
 cursor-style = block
 cursor-style-blink = true
 
+term = xterm-256color
 macos-option-as-alt = left
 keybind = alt+left=unbind
 keybind = alt+right=unbind

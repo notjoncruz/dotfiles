@@ -9,6 +9,7 @@ return {
         width = 0.4,
       },
     },
+    dashboard = { enabled = false },
     picker = {
       sources = {
         explorer = {
@@ -16,6 +17,11 @@ return {
             layout = {
               position = "right",
             },
+          },
+        },
+        command_history = {
+          layout = {
+            preset = "select",
           },
         },
       },

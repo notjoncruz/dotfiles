@@ -25,11 +25,14 @@ return {
           "Folded",
           "TelescopeNormal",
           "TelescopePromptNormal",
+          "BlinkCmpMenu",
           "SnacksExplorerNormal",
           "SnacksExplorerWinBar",
         }) do
           vim.api.nvim_set_hl(0, group, transparent)
         end
+        vim.api.nvim_set_hl(0, "BlinkCmpMenuBorder", { fg = "#535353", bg = "NONE" })
+        vim.api.nvim_set_hl(0, "BlinkCmpMenuSelection", { bg = "#323232" })
       end
 
       set_transparent()
