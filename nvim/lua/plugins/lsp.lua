@@ -1,16 +1,32 @@
 return {
 	{
 		"mason-org/mason.nvim",
-		opts = function(_, opts)
-			vim.list_extend(opts.ensure_installed, {
+		opts = {
+			ensure_installed = {
 				"stylua",
 				"shellcheck",
 				"shfmt",
-				"typescript-language-server",
-				"css-lsp",
-				"tailwindcss-language-server",
-				"prisma-language-server",
-			})
+			},
+		},
+		config = function(_, opts)
+			require("mason").setup(opts)
+			local mr = require("mason-registry")
+			mr:on("package:install:success", function()
+				vim.defer_fn(function()
+					require("lazy.core.handler.event").trigger({
+						event = "FileType",
+						buf = vim.api.nvim_get_current_buf(),
+					})
+				end, 100)
+			end)
+			mr.refresh(function()
+				for _, tool in ipairs(opts.ensure_installed or {}) do
+					local p = mr.get_package(tool)
+					if not p:is_installed() and not p:is_installing() then
+						p:install()
+					end
+				end
+			end)
 		end,
 	},
 

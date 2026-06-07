@@ -13,7 +13,7 @@ install_homebrew() {
   if command -v brew &>/dev/null; then return; fi
   if [[ "$OS" == "Linux" ]]; then
     sudo apt update
-    sudo apt install -y build-essential zsh
+    sudo apt install -y build-essential unzip zsh
   fi
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
   case "$OS" in
@@ -61,10 +61,21 @@ link_configs() {
   fi
 }
 
+setup_mise() {
+  mise install
+}
+
+setup_nvim() {
+  nvim --headless "+Lazy! sync" +qa 2>/dev/null
+  nvim --headless "+MasonInstallAll" +qa 2>/dev/null
+}
+
 install_homebrew
 install_packages
 install_omz
 install_tpm
 link_configs
+setup_mise
+setup_nvim
 
 echo "Done! Restart your shell or run: exec zsh"

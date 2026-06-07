@@ -31,6 +31,8 @@ cursor-style = block
 cursor-style-blink = true
 
 term = xterm-256color
+clipboard-read = allow
+clipboard-write = allow
 macos-option-as-alt = left
 keybind = alt+left=unbind
 keybind = alt+right=unbind
