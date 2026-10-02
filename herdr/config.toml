@@ -1,0 +1,27 @@
+onboarding = false
+[theme]
+name = "vesper"
+
+[theme.custom]
+panel_bg = "reset"
+surface_dim = "#121212"
+surface0 = "#212121"
+surface1 = "#323232"
+overlay0 = "#535353"
+overlay1 = "#737373"
+subtext0 = "#949494"
+text = "#d5d5d5"
+accent = "#ff0088"
+mauve = "#ff0088"
+red = "#ff0038"
+green = "#00ff77"
+yellow = "#ff7700"
+peach = "#ff7700"
+blue = "#47a6e0"
+teal = "#47eae0"
+
+[ui]
+accent = "#ff0088"
+
+[ui.toast]
+delivery = "off"

@@ -12,6 +12,8 @@
 !tmux/**
 !ghostty/
 !ghostty/**
+!herdr/
+!herdr/config.toml
 !mise/
 !mise/**
 !zsh/

@@ -2,32 +2,8 @@ return {
 	{
 		"mason-org/mason.nvim",
 		opts = {
-			ensure_installed = {
-				"stylua",
-				"shellcheck",
-				"shfmt",
-			},
+			ensure_installed = { "shellcheck" },
 		},
-		config = function(_, opts)
-			require("mason").setup(opts)
-			local mr = require("mason-registry")
-			mr:on("package:install:success", function()
-				vim.defer_fn(function()
-					require("lazy.core.handler.event").trigger({
-						event = "FileType",
-						buf = vim.api.nvim_get_current_buf(),
-					})
-				end, 100)
-			end)
-			mr.refresh(function()
-				for _, tool in ipairs(opts.ensure_installed or {}) do
-					local p = mr.get_package(tool)
-					if not p:is_installed() and not p:is_installing() then
-						p:install()
-					end
-				end
-			end)
-		end,
 	},
 
 	{
@@ -36,42 +12,6 @@ return {
 			inlay_hints = { enabled = false },
 			servers = {
 				cssls = {},
-				tailwindcss = {
-					root_dir = function(...)
-						return require("lspconfig.util").root_pattern(".git")(...)
-					end,
-				},
-				tsserver = {
-					root_dir = function(...)
-						return require("lspconfig.util").root_pattern(".git")(...)
-					end,
-					single_file_support = false,
-					settings = {
-						typescript = {
-							inlayHints = {
-								includeInlayParameterNameHints = "literal",
-								includeInlayParameterNameHintsWhenArgumentMatchesName = false,
-								includeInlayFunctionParameterTypeHints = true,
-								includeInlayVariableTypeHints = false,
-								includeInlayPropertyDeclarationTypeHints = true,
-								includeInlayFunctionLikeReturnTypeHints = true,
-								includeInlayEnumMemberValueHints = true,
-							},
-						},
-						javascript = {
-							inlayHints = {
-								includeInlayParameterNameHints = "all",
-								includeInlayParameterNameHintsWhenArgumentMatchesName = false,
-								includeInlayFunctionParameterTypeHints = true,
-								includeInlayVariableTypeHints = true,
-								includeInlayPropertyDeclarationTypeHints = true,
-								includeInlayFunctionLikeReturnTypeHints = true,
-								includeInlayEnumMemberValueHints = true,
-							},
-						},
-					},
-				},
-				prismals = {},
 				yamlls = {
 					settings = {
 						yaml = {
@@ -80,7 +20,6 @@ return {
 					},
 				},
 				lua_ls = {
-					single_file_support = true,
 					settings = {
 						Lua = {
 							workspace = {

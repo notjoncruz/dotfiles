@@ -55,6 +55,8 @@ link_configs() {
     ln -sfn "$DOTFILES/nvim" "$HOME/.config/nvim"
     ln -sfn "$DOTFILES/tmux" "$HOME/.config/tmux"
     ln -sfn "$DOTFILES/mise" "$HOME/.config/mise"
+    mkdir -p "$HOME/.config/herdr"
+    ln -sf "$DOTFILES/herdr/config.toml" "$HOME/.config/herdr/config.toml"
     if [[ "$OS" == "Darwin" ]]; then
       ln -sfn "$DOTFILES/ghostty" "$HOME/.config/ghostty"
     fi
@@ -67,7 +69,6 @@ setup_mise() {
 
 setup_nvim() {
   nvim --headless "+Lazy! sync" +qa 2>/dev/null
-  nvim --headless "+MasonInstallAll" +qa 2>/dev/null
 }
 
 install_homebrew
