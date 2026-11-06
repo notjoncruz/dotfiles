@@ -22,6 +22,7 @@ teal = "#47eae0"
 
 [ui]
 accent = "#ff0088"
+prompt_new_tab_name = false
 
 [ui.toast]
 delivery = "off"
