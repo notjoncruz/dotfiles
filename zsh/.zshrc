@@ -23,3 +23,5 @@ eval "$(mise activate zsh)"
 alias ls="eza"
 alias ll="eza -l --git"
 alias la="eza -la --git"
+
+alias cfg='git --git-dir=$HOME/.agent-config.git --work-tree=$HOME'
