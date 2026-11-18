@@ -1,6 +1,13 @@
 [tools]
 node = "latest"
 python = "latest"
+fzf = "latest"
+go = "latest"
+gum = "latest"
+herdr = "latest"
+jq = "latest"
+lazygit = "latest"
+railway = "latest"
 
 [settings]
 idiomatic_version_file_enable_tools = ["node"]

@@ -26,3 +26,6 @@ nvim/lazy-lock.json
 nvim/lazyvim.json
 nvim/.luarc.json
 tmux/plugins/
+
+# Per-machine tool overrides
+mise/config.local.toml
